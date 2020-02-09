@@ -1,5 +1,6 @@
 package com.moneytruth.screens
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -26,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.menu_setting){
-            //
+            startActivity(Intent(this, ItemListActivity::class.java))
             return true
         }else{
             return super.onOptionsItemSelected(item)

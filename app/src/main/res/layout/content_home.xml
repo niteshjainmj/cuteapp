@@ -73,7 +73,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@drawable/goal_image" />
+                android:src="@drawable/goal_image"
+                android:contentDescription="@string/app_name" />
 
             <TextView
                 android:id="@+id/textView3"
