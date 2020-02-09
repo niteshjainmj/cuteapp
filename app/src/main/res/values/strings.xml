@@ -2,4 +2,24 @@
     <string name="app_name">Money Truth</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_home">HomeActivity</string>
+
+    <string name="home_goal_label">Your Financial Goal</string>
+    <string name="home_saving_type_label">Saving Goal</string>
+    <string name="home_year_type_label">Years to achieve Goal</string>
+    <string name="home_total_type_label">Total Money saved</string>
+
+    <string name="btn_transfer">Transfer</string>
+    <string name="btn_deposit">Deposit</string>
+    <string name="btn_withdraw">Withdraw</string>
+    <string name="home_piggi_label">Piggi Bank</string>
+
+    <string name="home_bank_label">Saving Account</string>
+
+    <string name="home_rate_of_inflation">Rate of Inflation</string>
+    <string name="home_piggi_current_balance">Current Balance</string>
+    <string name="home_piggi_future">Future Value</string>
+
+    <string name="home_bank_interest_label">Interest Rate</string>
+
+
 </resources>
