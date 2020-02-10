@@ -27,6 +27,12 @@ class AppManager private constructor()  {
         const val SHARED_PREF_PIGGI_COLOR_KEY = "app_piggi_color"
         const val SHARED_PREF_SAVING_COLOR_KEY = "app_saving_color"
 
+
+        const val SHARED_PREF_GOAL_INDEX_KEY = "goal_index"
+        const val SHARED_PREF_GOAL_TITLE_KEY = "goal_title"
+        const val SHARED_PREF_GOAL_YEAR_KEY = "goal_year"
+        const val SHARED_PREF_GOAL_AMOUNT_KEY = "goal_amount"
+
         private var smManager: AppManager? = null
 
         val manager: AppManager
@@ -36,6 +42,18 @@ class AppManager private constructor()  {
                 }
                 return smManager!!
             }
+    }
+
+    fun saveGoalDetails(aContext : Context, aGaolItem : GoalDetails){
+        if(aGaolItem.mGoalName.isNotEmpty()){
+            StorageUtils.putPref(aContext, SHARED_PREF_GOAL_INDEX_KEY, aGaolItem.mGoalIndex)
+            StorageUtils.putPref(aContext, SHARED_PREF_GOAL_TITLE_KEY, aGaolItem.mGoalName)
+            StorageUtils.putPref(aContext, SHARED_PREF_GOAL_AMOUNT_KEY, aGaolItem.mAmount)
+            StorageUtils.putPref(aContext, SHARED_PREF_GOAL_YEAR_KEY, aGaolItem.mYears)
+
+        }
+
+
     }
 
 

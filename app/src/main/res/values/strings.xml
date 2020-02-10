@@ -39,6 +39,18 @@
 
 
     <string name="goal_select_label">Select Your Goal</string>
+    <string name="goal_balance_label">Ending Balance(in $)</string>
+    <string name="goal_no_of_years_label">Number of years</string>
+    <string name="goal_set_btn_label">Save Goal</string>
+
+
+    <string name="goal_select_error_msg">Please select any goal</string>
+    <string name="goal_amount_error_msg">Please enter your goal amount</string>
+
+    <string name="goal_save_sucess">Goal Saved Successfully</string>
+
+
+
 
     <string name="goal_one">Save for a House</string>
     <string name="goal_two">Save for College</string>
