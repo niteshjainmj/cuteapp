@@ -37,4 +37,14 @@
     <string name="ui_save_btn_label">Save Changes</string>
     <string name="save_change_sucess">Saved</string>
 
+
+    <string name="goal_select_label">Select Your Goal</string>
+
+    <string name="goal_one">Save for a House</string>
+    <string name="goal_two">Save for College</string>
+    <string name="goal_three">Save for a Car</string>
+    <string name="goal_four">Save for Vacation</string>
+    <string name="goal_five">Retire Early</string>
+    <string name="goal_six">Go Shopping</string>
+
 </resources>

@@ -14,6 +14,14 @@ class AppManager private constructor()  {
         const val SETTING_UI_INDEX = 2
         const val SETTING_HISTORY_INDEX = 3
 
+
+        const val GOAL_HOUSE_INDEX = 1
+        const val GOAL_COLLAGE_INDEX = 2
+        const val GOAL_CAR_INDEX = 3
+        const val GOAL_VACATION_INDEX = 4
+        const val GOAL_RETIRE_INDEX = 5
+        const val GOAL_SHOPPING_INDEX = 6
+
         const val SHARED_PREF_BG_COLOR_KEY = "app_bg_color"
         const val SHARED_PREF_BTN_COLOR_KEY = "app_btn_color"
         const val SHARED_PREF_PIGGI_COLOR_KEY = "app_piggi_color"
@@ -123,6 +131,19 @@ class AppManager private constructor()  {
         list.add(SettingMenuItem(aContext.getString(R.string.setting_ui_title), SETTING_UI_INDEX))
         list.add(SettingMenuItem(aContext.getString(R.string.setting_history_title), SETTING_HISTORY_INDEX))
         return list
+    }
+
+
+    fun getAllGoalList(aContext : Context): ArrayList<GoalItem>{
+        val list = ArrayList<GoalItem>()
+        list.add(GoalItem(aContext.getString(R.string.goal_one), R.drawable.goal_image, GOAL_HOUSE_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_two), R.drawable.goal_image, GOAL_COLLAGE_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_three), R.drawable.goal_image, GOAL_CAR_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_four), R.drawable.goal_image, GOAL_VACATION_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_five), R.drawable.goal_image, GOAL_RETIRE_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_six), R.drawable.goal_image, GOAL_SHOPPING_INDEX, false))
+        return list
+
     }
 
 
