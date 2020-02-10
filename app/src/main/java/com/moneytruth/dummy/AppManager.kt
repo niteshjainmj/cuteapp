@@ -33,25 +33,25 @@ class AppManager private constructor()  {
 
     fun setBackgroundColor(aContext : Context, aColorStr : String?){
         if(aColorStr != null){
-            StorageUtils.putPref(aContext, SHARED_PREF_BG_COLOR_KEY, aColorStr)
+            StorageUtils.putPref(aContext, SHARED_PREF_BG_COLOR_KEY, "#"+ aColorStr)
         }
     }
 
     fun setBtnColor(aContext : Context, aColorStr : String?){
         if(aColorStr != null){
-            StorageUtils.putPref(aContext, SHARED_PREF_BTN_COLOR_KEY, aColorStr)
+            StorageUtils.putPref(aContext, SHARED_PREF_BTN_COLOR_KEY, "#"+ aColorStr)
         }
     }
 
     fun setPiggiBankColor(aContext : Context, aColorStr : String?){
         if(aColorStr != null){
-            StorageUtils.putPref(aContext, SHARED_PREF_PIGGI_COLOR_KEY, aColorStr)
+            StorageUtils.putPref(aContext, SHARED_PREF_PIGGI_COLOR_KEY, "#"+ aColorStr)
         }
     }
 
     fun setSavingColor(aContext : Context, aColorStr : String?){
         if(aColorStr != null){
-            StorageUtils.putPref(aContext, SHARED_PREF_SAVING_COLOR_KEY, aColorStr)
+            StorageUtils.putPref(aContext, SHARED_PREF_SAVING_COLOR_KEY, "#"+ aColorStr)
         }
     }
 

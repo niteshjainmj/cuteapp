@@ -26,7 +26,15 @@
     <string name="setting_ui_title">UI Setting</string>
     <string name="setting_history_title">History</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+
+    <string name="ui_bg_label">Background Color</string>
+    <string name="ui_piggi_label">Piggi Bank Background Color</string>
+    <string name="ui_saving_label">Saving Bank Background Color</string>
+    <string name="ui_btn_label">App Buttons Background Color</string>
+    <string name="ui_save_btn_label">Save Changes</string>
+    <string name="save_change_sucess">Saved</string>
 
 </resources>
