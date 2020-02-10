@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mHomeMainView"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".screens.HomeActivity"
     tools:showIn="@layout/activity_home">
@@ -120,7 +121,7 @@
         app:layout_constraintGuide_percent="0.66" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/mHomeTransferBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -128,7 +129,7 @@
         android:background="@drawable/btn_round_corner_bg"
         android:text="@string/btn_transfer"
         android:textColor="@color/colorBtnText"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/mHomeDepositBtn"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -136,7 +137,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/mHomeDepositBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -145,15 +146,15 @@
         android:text="@string/btn_deposit"
         android:textColor="@color/colorBtnText"
 
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/mHomeWithdrawBtn"
+        app:layout_constraintEnd_toEndOf="@+id/mHomeTransferBtn"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/mHomeTransferBtn"
+        app:layout_constraintTop_toBottomOf="@+id/mHomeTransferBtn"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/mHomeWithdrawBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_round_corner_bg"
@@ -161,11 +162,11 @@
 
         android:textColor="@color/colorBtnText"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/mHomeDepositBtn"
         app:layout_constraintHorizontal_bias="0.5"
 
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@+id/mHomeDepositBtn"
+        app:layout_constraintTop_toBottomOf="@+id/mHomeDepositBtn"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -189,6 +190,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:visibility="visible"
+        android:id="@+id/mCvPiggiHome"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline">
@@ -259,6 +261,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:id="@+id/mCvSavingHome"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="@+id/guideline">

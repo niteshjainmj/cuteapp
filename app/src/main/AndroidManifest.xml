@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:screenOrientation="landscape"
-            android:name=".screens.ItemListActivity"
+            android:name=".screens.SettingListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
@@ -31,11 +31,11 @@
         <activity
             android:name=".screens.ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".screens.ItemListActivity"
+            android:parentActivityName=".screens.SettingListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.moneytruth.screens.ItemListActivity" />
+                android:value="com.moneytruth.screens.SettingListActivity" />
         </activity>
     </application>
 

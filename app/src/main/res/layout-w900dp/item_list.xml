@@ -10,7 +10,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".screens.ItemListActivity">
+    tools:context=".screens.SettingListActivity">
 
     <!--
     This layout is a two-pane layout for the Items
@@ -25,10 +25,11 @@
         android:name="com.moneytruth.ItemListFragment"
         android:layout_width="@dimen/item_width"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.moneytruth.screens.ItemListActivity"
+        tools:context="com.moneytruth.screens.SettingListActivity"
         tools:listitem="@layout/item_list_content" />
 
     <FrameLayout

@@ -9,4 +9,11 @@
     <color name="colorBlack">#000000</color>
 
     <color name="colorBtnText">#ffffff</color>
+
+
+    <color name="colorDefaultBg">#ffffff</color>
+    <color name="colorDefaultPiggiBg">#FF00ff</color>
+    <color name="colorDefaultSavingBg">#ffffff</color>
+    <color name="colorDefaultBtnBg">#000000</color>
+
 </resources>

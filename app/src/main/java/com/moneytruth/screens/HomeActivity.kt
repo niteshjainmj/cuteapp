@@ -7,8 +7,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.moneytruth.R
+import com.moneytruth.dummy.AppManager
 
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -27,11 +29,32 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.menu_setting){
-            startActivity(Intent(this, ItemListActivity::class.java))
+            startActivity(Intent(this, SettingListActivity::class.java))
             return true
         }else{
             return super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setAllViewColors()
+    }
+
+    fun setAllViewColors(){
+        val appManager = AppManager.manager
+        mHomeMainView.setBackgroundColor(appManager.getBgColor(this))
+        mCvPiggiHome.setCardBackgroundColor(appManager.getPiggiBgColor(this))
+        mCvSavingHome.setCardBackgroundColor(appManager.getSavingBgColor(this))
+
+
+
+        mHomeDepositBtn.setBackgroundColor(appManager.getBtnBgColor(this))
+        mHomeWithdrawBtn.setBackgroundColor(appManager.getBtnBgColor(this))
+        mHomeTransferBtn.setBackgroundColor(appManager.getBtnBgColor(this))
+
+
 
     }
+
 }

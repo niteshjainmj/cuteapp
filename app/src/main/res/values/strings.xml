@@ -22,4 +22,11 @@
     <string name="home_bank_interest_label">Interest Rate</string>
 
 
+    <string name="setting_goal_title">Select Your Goal</string>
+    <string name="setting_ui_title">UI Setting</string>
+    <string name="setting_history_title">History</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
