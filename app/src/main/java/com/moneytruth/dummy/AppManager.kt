@@ -50,10 +50,20 @@ class AppManager private constructor()  {
             StorageUtils.putPref(aContext, SHARED_PREF_GOAL_TITLE_KEY, aGaolItem.mGoalName)
             StorageUtils.putPref(aContext, SHARED_PREF_GOAL_AMOUNT_KEY, aGaolItem.mAmount)
             StorageUtils.putPref(aContext, SHARED_PREF_GOAL_YEAR_KEY, aGaolItem.mYears)
-
         }
+    }
 
 
+    fun getSavedGoalDetails(aContext: Context): GoalDetails?{
+        val goalName = StorageUtils.getPrefStr(aContext, SHARED_PREF_GOAL_TITLE_KEY)
+        if (goalName != null && goalName.isNotEmpty()){
+            val index = StorageUtils.getPrefForInt(aContext, SHARED_PREF_GOAL_INDEX_KEY)
+            val amount = StorageUtils.getPrefStr(aContext, SHARED_PREF_GOAL_AMOUNT_KEY)
+            val years = StorageUtils.getPrefForInt(aContext, SHARED_PREF_GOAL_YEAR_KEY)
+
+            return GoalDetails(index, goalName, years, amount!!)
+        }
+        return null
     }
 
 
@@ -147,7 +157,7 @@ class AppManager private constructor()  {
         val list = ArrayList<SettingMenuItem>()
         list.add(SettingMenuItem(aContext.getString(R.string.setting_goal_title), SETTING_GOAL_INDEX))
         list.add(SettingMenuItem(aContext.getString(R.string.setting_ui_title), SETTING_UI_INDEX))
-        list.add(SettingMenuItem(aContext.getString(R.string.setting_history_title), SETTING_HISTORY_INDEX))
+        //list.add(SettingMenuItem(aContext.getString(R.string.setting_history_title), SETTING_HISTORY_INDEX))
         return list
     }
 
@@ -162,6 +172,19 @@ class AppManager private constructor()  {
         list.add(GoalItem(aContext.getString(R.string.goal_six), R.drawable.goal_image, GOAL_SHOPPING_INDEX, false))
         return list
 
+    }
+
+
+    fun getIconForGOalIndex(aIndex : Int) : Int{
+        when(aIndex){
+            GOAL_HOUSE_INDEX-> return R.drawable.goal_image
+            GOAL_COLLAGE_INDEX-> return R.drawable.goal_image
+            GOAL_CAR_INDEX-> return R.drawable.goal_image
+            GOAL_VACATION_INDEX-> return R.drawable.goal_image
+            GOAL_RETIRE_INDEX-> return R.drawable.goal_image
+            GOAL_SHOPPING_INDEX-> return R.drawable.goal_image
+        }
+        return  R.drawable.goal_image
     }
 
 

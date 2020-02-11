@@ -8,7 +8,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
 
-    <color name="colorBtnText">#ffffff</color>
+    <color name="colorBtnText">#000000</color>
 
 
     <color name="colorDefaultBg">#ffffff</color>

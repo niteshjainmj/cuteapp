@@ -61,4 +61,32 @@
 
     <string name="goal_money_hint">Eg. 124.56</string>
 
+    <string name="no_goal_selected_error">No Goal Selected</string>
+    <string name="no_amount_error">Please enter amount</string>
+
+
+    <string name="transfer_dialog_title">Transfer</string>
+    <string name="transfer_dialog_msg">Please enter amount</string>
+    <string name="transfer_dialog_piggi_to">Piggi Bank to Saving Account</string>
+    <string name="transfer_dialog_bank_to">Saving Account to Piggi Bank</string>
+    <string name="transfer_dialog_cancel">Cancel</string>
+
+
+
+    <string name="withdraw_dialog_title">Withdraw</string>
+    <string name="withdraw_dialog_msg">Please enter amount</string>
+    <string name="withdraw_dialog_piggi">From Piggi Bank</string>
+    <string name="withdraw_dialog_bank">From Saving Account</string>
+    <string name="withdraw_dialog_cancel">Cancel</string>
+
+
+    <string name="deposit_dialog_title">Deposit</string>
+    <string name="deposit_dialog_msg">Please enter amount</string>
+    <string name="deposit_dialog_piggi">To Piggi Bank</string>
+    <string name="deposit_dialog_bank">To Saving Account</string>
+    <string name="deposit_dialog_cancel">Cancel</string>
+
+
+    <string name="year_label">Years</string>
+
 </resources>
