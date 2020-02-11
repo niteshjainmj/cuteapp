@@ -61,6 +61,7 @@
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:hint="@string/goal_money_hint"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline11"

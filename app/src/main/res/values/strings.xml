@@ -59,4 +59,6 @@
     <string name="goal_five">Retire Early</string>
     <string name="goal_six">Go Shopping</string>
 
+    <string name="goal_money_hint">Eg. 124.56</string>
+
 </resources>
