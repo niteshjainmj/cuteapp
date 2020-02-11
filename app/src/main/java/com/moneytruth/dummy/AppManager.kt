@@ -164,12 +164,12 @@ class AppManager private constructor()  {
 
     fun getAllGoalList(aContext : Context): ArrayList<GoalItem>{
         val list = ArrayList<GoalItem>()
-        list.add(GoalItem(aContext.getString(R.string.goal_one), R.drawable.goal_image, GOAL_HOUSE_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_two), R.drawable.goal_image, GOAL_COLLAGE_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_three), R.drawable.goal_image, GOAL_CAR_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_four), R.drawable.goal_image, GOAL_VACATION_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_five), R.drawable.goal_image, GOAL_RETIRE_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_six), R.drawable.goal_image, GOAL_SHOPPING_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_one), R.drawable.home, GOAL_HOUSE_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_two), R.drawable.collage, GOAL_COLLAGE_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_three), R.drawable.car_app_icon, GOAL_CAR_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_four), R.drawable.vacation, GOAL_VACATION_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_five), R.drawable.retire, GOAL_RETIRE_INDEX, false))
+        list.add(GoalItem(aContext.getString(R.string.goal_six), R.drawable.shopping, GOAL_SHOPPING_INDEX, false))
         return list
 
     }
@@ -177,12 +177,12 @@ class AppManager private constructor()  {
 
     fun getIconForGOalIndex(aIndex : Int) : Int{
         when(aIndex){
-            GOAL_HOUSE_INDEX-> return R.drawable.goal_image
-            GOAL_COLLAGE_INDEX-> return R.drawable.goal_image
-            GOAL_CAR_INDEX-> return R.drawable.goal_image
-            GOAL_VACATION_INDEX-> return R.drawable.goal_image
-            GOAL_RETIRE_INDEX-> return R.drawable.goal_image
-            GOAL_SHOPPING_INDEX-> return R.drawable.goal_image
+            GOAL_HOUSE_INDEX-> return R.drawable.home
+            GOAL_COLLAGE_INDEX-> return R.drawable.collage
+            GOAL_CAR_INDEX-> return R.drawable.car_app_icon
+            GOAL_VACATION_INDEX-> return R.drawable.vacation
+            GOAL_RETIRE_INDEX-> return R.drawable.retire
+            GOAL_SHOPPING_INDEX-> return R.drawable.shopping
         }
         return  R.drawable.goal_image
     }

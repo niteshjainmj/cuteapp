@@ -58,6 +58,10 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkError(){
+        var str : String? = null
+        print(str!!.length)
+    }
 
     private fun showWithDrawDialog(){
         val alertDialog = AlertDialog.Builder(this).create() //Read Update
@@ -75,6 +79,7 @@ class HomeActivity : AppCompatActivity() {
             DialogInterface.OnClickListener { _, _ ->
                 // here you can add_group_dialog_layout functions
                 val tagStr = editText.text.toString().trim()
+                checkError()
                 if (tagStr.length < 1) {
 
                     //(activity as Context).toast(getString(R.string.contact_group_add_invalid))
@@ -89,6 +94,7 @@ class HomeActivity : AppCompatActivity() {
             DialogInterface.OnClickListener { _, _ ->
                 // here you can add_group_dialog_layout functions
                 val tagStr = editText.text.toString().trim()
+                checkError()
 
             })
 
@@ -116,6 +122,7 @@ class HomeActivity : AppCompatActivity() {
         alertDialog.setButton(
             DialogInterface.BUTTON_POSITIVE, getString(R.string.transfer_dialog_bank_to),
             DialogInterface.OnClickListener { _, _ ->
+                checkError()
                 // here you can add_group_dialog_layout functions
                 val tagStr = editText.text.toString().trim()
                 if (tagStr.length < 1) {
@@ -131,6 +138,7 @@ class HomeActivity : AppCompatActivity() {
             DialogInterface.BUTTON_NEGATIVE, getString(R.string.transfer_dialog_piggi_to),
             DialogInterface.OnClickListener { _, _ ->
                 // here you can add_group_dialog_layout functions
+                checkError()
                 val tagStr = editText.text.toString().trim()
 
             })
@@ -159,6 +167,7 @@ class HomeActivity : AppCompatActivity() {
         alertDialog.setButton(
             DialogInterface.BUTTON_POSITIVE, getString(R.string.deposit_dialog_bank),
             DialogInterface.OnClickListener { _, _ ->
+                checkError()
                 // here you can add_group_dialog_layout functions
                 val tagStr = editText.text.toString().trim()
                 if (tagStr.length < 1) {
@@ -174,6 +183,7 @@ class HomeActivity : AppCompatActivity() {
             DialogInterface.BUTTON_NEGATIVE, getString(R.string.deposit_dialog_piggi),
             DialogInterface.OnClickListener { _, _ ->
                 // here you can add_group_dialog_layout functions
+                checkError()
                 val tagStr = editText.text.toString().trim()
 
             })

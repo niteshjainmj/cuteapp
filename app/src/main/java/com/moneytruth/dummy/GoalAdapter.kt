@@ -26,6 +26,7 @@ RecyclerView.Adapter<GoalAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = aGoalList[position]
         holder.textView.text = item.mTitle
+        holder.imageView.setImageResource(item.mIcon)
 
         holder.chileMainView.background = if (mSelectedIndex == position) mContext.getDrawable(R.drawable.rounded_corner_goal_selector_bg) else null
 
