@@ -1,4 +1,4 @@
-package com.moneytruth.dummy
+package com.moneytruth.app
 
 import android.text.InputFilter
 import android.text.Spanned

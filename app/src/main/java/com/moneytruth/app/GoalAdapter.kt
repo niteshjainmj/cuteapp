@@ -1,4 +1,4 @@
-package com.moneytruth.dummy
+package com.moneytruth.app
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.goal_grid_item.view.*
 
 class GoalAdapter(var mContext : Context, var aGoalList : ArrayList<GoalItem>, var mSelectedIndex : Int,
                   var  mClickCallBack:
-                      (aPosition : Int, aGaolItem :GoalItem) -> Unit) :
+                      (aPosition : Int, aGaolItem : GoalItem) -> Unit) :
 RecyclerView.Adapter<GoalAdapter.ViewHolder>() {
 
 

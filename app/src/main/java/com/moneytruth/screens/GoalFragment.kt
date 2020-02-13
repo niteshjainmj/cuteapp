@@ -4,16 +4,14 @@ package com.moneytruth.screens
 import android.content.Context
 import android.os.Bundle
 import android.text.InputFilter
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.moneytruth.R
-import com.moneytruth.dummy.*
+import com.moneytruth.app.*
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
@@ -53,15 +51,23 @@ class GoalFragment : Fragment() {
         //mRvGoal.addItemDecoration(dividerItemDecoration)
         mAllGoalItem = AppManager.manager.getAllGoalList(activity as Context)
 
-        val adapter = GoalAdapter(activity as Context, mAllGoalItem, mSelectedIndex){
-            position, it->
+        val adapter = GoalAdapter(
+            activity as Context,
+            mAllGoalItem,
+            mSelectedIndex
+        ) { position, it ->
             mSelectedIndex = position
         }
         mRvGoal.adapter = adapter
 
 
     //Added Balance system
-        mEtBalance.setFilters(arrayOf<InputFilter>(DecimalDigitsInputFilter(25, 2)))
+        mEtBalance.setFilters(arrayOf<InputFilter>(
+            DecimalDigitsInputFilter(
+                25,
+                2
+            )
+        ))
 
 
         //Year range handler
@@ -94,7 +100,10 @@ class GoalFragment : Fragment() {
             if(isValidGoal() &&  isValidAmount()){
                 var goalItem = GoalDetails(
                     mAllGoalItem[mSelectedIndex].mIndex,
-                    mAllGoalItem[mSelectedIndex].mTitle, mAmount =  mEtBalance.text.toString().trim(), mYears = mIndicatorSeekBar.progress.toInt())
+                    mAllGoalItem[mSelectedIndex].mTitle,
+                    mAmount = mEtBalance.text.toString().trim(),
+                    mYears = mIndicatorSeekBar.progress.toInt()
+                )
                 AppManager.manager.saveGoalDetails(activity as Context, goalItem)
 
                 Toast.makeText(activity, getString(R.string.goal_save_sucess), Toast.LENGTH_SHORT).show()

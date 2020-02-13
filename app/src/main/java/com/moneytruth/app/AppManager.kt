@@ -1,4 +1,4 @@
-package com.moneytruth.dummy
+package com.moneytruth.app
 
 import android.content.Context
 import android.graphics.Color
@@ -38,7 +38,8 @@ class AppManager private constructor()  {
         val manager: AppManager
             get() {
                 if (smManager == null) {
-                    smManager = AppManager()
+                    smManager =
+                        AppManager()
                 }
                 return smManager!!
             }
@@ -46,22 +47,55 @@ class AppManager private constructor()  {
 
     fun saveGoalDetails(aContext : Context, aGaolItem : GoalDetails){
         if(aGaolItem.mGoalName.isNotEmpty()){
-            StorageUtils.putPref(aContext, SHARED_PREF_GOAL_INDEX_KEY, aGaolItem.mGoalIndex)
-            StorageUtils.putPref(aContext, SHARED_PREF_GOAL_TITLE_KEY, aGaolItem.mGoalName)
-            StorageUtils.putPref(aContext, SHARED_PREF_GOAL_AMOUNT_KEY, aGaolItem.mAmount)
-            StorageUtils.putPref(aContext, SHARED_PREF_GOAL_YEAR_KEY, aGaolItem.mYears)
+            StorageUtils.putPref(
+                aContext,
+                SHARED_PREF_GOAL_INDEX_KEY,
+                aGaolItem.mGoalIndex
+            )
+            StorageUtils.putPref(
+                aContext,
+                SHARED_PREF_GOAL_TITLE_KEY,
+                aGaolItem.mGoalName
+            )
+            StorageUtils.putPref(
+                aContext,
+                SHARED_PREF_GOAL_AMOUNT_KEY,
+                aGaolItem.mAmount
+            )
+            StorageUtils.putPref(
+                aContext,
+                SHARED_PREF_GOAL_YEAR_KEY,
+                aGaolItem.mYears
+            )
         }
     }
 
 
     fun getSavedGoalDetails(aContext: Context): GoalDetails?{
-        val goalName = StorageUtils.getPrefStr(aContext, SHARED_PREF_GOAL_TITLE_KEY)
+        val goalName = StorageUtils.getPrefStr(
+            aContext,
+            SHARED_PREF_GOAL_TITLE_KEY
+        )
         if (goalName != null && goalName.isNotEmpty()){
-            val index = StorageUtils.getPrefForInt(aContext, SHARED_PREF_GOAL_INDEX_KEY)
-            val amount = StorageUtils.getPrefStr(aContext, SHARED_PREF_GOAL_AMOUNT_KEY)
-            val years = StorageUtils.getPrefForInt(aContext, SHARED_PREF_GOAL_YEAR_KEY)
+            val index = StorageUtils.getPrefForInt(
+                aContext,
+                SHARED_PREF_GOAL_INDEX_KEY
+            )
+            val amount = StorageUtils.getPrefStr(
+                aContext,
+                SHARED_PREF_GOAL_AMOUNT_KEY
+            )
+            val years = StorageUtils.getPrefForInt(
+                aContext,
+                SHARED_PREF_GOAL_YEAR_KEY
+            )
 
-            return GoalDetails(index, goalName, years, amount!!)
+            return GoalDetails(
+                index,
+                goalName,
+                years,
+                amount!!
+            )
         }
         return null
     }
@@ -69,31 +103,50 @@ class AppManager private constructor()  {
 
     fun setBackgroundColor(aContext : Context, aColorStr : String?){
         if(aColorStr != null){
-            StorageUtils.putPref(aContext, SHARED_PREF_BG_COLOR_KEY, "#"+ aColorStr)
+            StorageUtils.putPref(
+                aContext,
+                SHARED_PREF_BG_COLOR_KEY,
+                "#" + aColorStr
+            )
         }
     }
 
     fun setBtnColor(aContext : Context, aColorStr : String?){
         if(aColorStr != null){
-            StorageUtils.putPref(aContext, SHARED_PREF_BTN_COLOR_KEY, "#"+ aColorStr)
+            StorageUtils.putPref(
+                aContext,
+                SHARED_PREF_BTN_COLOR_KEY,
+                "#" + aColorStr
+            )
         }
     }
 
     fun setPiggiBankColor(aContext : Context, aColorStr : String?){
         if(aColorStr != null){
-            StorageUtils.putPref(aContext, SHARED_PREF_PIGGI_COLOR_KEY, "#"+ aColorStr)
+            StorageUtils.putPref(
+                aContext,
+                SHARED_PREF_PIGGI_COLOR_KEY,
+                "#" + aColorStr
+            )
         }
     }
 
     fun setSavingColor(aContext : Context, aColorStr : String?){
         if(aColorStr != null){
-            StorageUtils.putPref(aContext, SHARED_PREF_SAVING_COLOR_KEY, "#"+ aColorStr)
+            StorageUtils.putPref(
+                aContext,
+                SHARED_PREF_SAVING_COLOR_KEY,
+                "#" + aColorStr
+            )
         }
     }
 
     fun getBgColor(aContext: Context): Int{
         var color : Int = ContextCompat.getColor(aContext, R.color.colorDefaultBg)
-        val colorStr = StorageUtils.getPrefStr(aContext, SHARED_PREF_BG_COLOR_KEY)
+        val colorStr = StorageUtils.getPrefStr(
+            aContext,
+            SHARED_PREF_BG_COLOR_KEY
+        )
         if(colorStr != null){
           color = try {
                 Color.parseColor(colorStr)
@@ -109,7 +162,10 @@ class AppManager private constructor()  {
 
     fun getBtnBgColor(aContext: Context): Int{
         var color : Int = ContextCompat.getColor(aContext, R.color.colorDefaultBtnBg)
-        val colorStr = StorageUtils.getPrefStr(aContext, SHARED_PREF_BTN_COLOR_KEY)
+        val colorStr = StorageUtils.getPrefStr(
+            aContext,
+            SHARED_PREF_BTN_COLOR_KEY
+        )
         if(colorStr != null){
             color = try {
                 Color.parseColor(colorStr)
@@ -124,7 +180,10 @@ class AppManager private constructor()  {
 
     fun getPiggiBgColor(aContext: Context): Int{
         var color : Int = ContextCompat.getColor(aContext, R.color.colorDefaultPiggiBg)
-        val colorStr = StorageUtils.getPrefStr(aContext, SHARED_PREF_PIGGI_COLOR_KEY)
+        val colorStr = StorageUtils.getPrefStr(
+            aContext,
+            SHARED_PREF_PIGGI_COLOR_KEY
+        )
         if(colorStr != null){
             color = try {
                 Color.parseColor(colorStr)
@@ -139,7 +198,10 @@ class AppManager private constructor()  {
 
     fun getSavingBgColor(aContext: Context): Int{
         var color : Int = ContextCompat.getColor(aContext, R.color.colorDefaultSavingBg)
-        val colorStr = StorageUtils.getPrefStr(aContext, SHARED_PREF_SAVING_COLOR_KEY)
+        val colorStr = StorageUtils.getPrefStr(
+            aContext,
+            SHARED_PREF_SAVING_COLOR_KEY
+        )
         if(colorStr != null){
             color = try {
                 Color.parseColor(colorStr)
@@ -155,8 +217,18 @@ class AppManager private constructor()  {
 
     fun getAllSettingMenuList(aContext : Context): ArrayList<SettingMenuItem>{
         val list = ArrayList<SettingMenuItem>()
-        list.add(SettingMenuItem(aContext.getString(R.string.setting_goal_title), SETTING_GOAL_INDEX))
-        list.add(SettingMenuItem(aContext.getString(R.string.setting_ui_title), SETTING_UI_INDEX))
+        list.add(
+            SettingMenuItem(
+                aContext.getString(R.string.setting_goal_title),
+                SETTING_GOAL_INDEX
+            )
+        )
+        list.add(
+            SettingMenuItem(
+                aContext.getString(R.string.setting_ui_title),
+                SETTING_UI_INDEX
+            )
+        )
         //list.add(SettingMenuItem(aContext.getString(R.string.setting_history_title), SETTING_HISTORY_INDEX))
         return list
     }
@@ -164,12 +236,54 @@ class AppManager private constructor()  {
 
     fun getAllGoalList(aContext : Context): ArrayList<GoalItem>{
         val list = ArrayList<GoalItem>()
-        list.add(GoalItem(aContext.getString(R.string.goal_one), R.drawable.home, GOAL_HOUSE_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_two), R.drawable.collage, GOAL_COLLAGE_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_three), R.drawable.car_app_icon, GOAL_CAR_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_four), R.drawable.vacation, GOAL_VACATION_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_five), R.drawable.retire, GOAL_RETIRE_INDEX, false))
-        list.add(GoalItem(aContext.getString(R.string.goal_six), R.drawable.shopping, GOAL_SHOPPING_INDEX, false))
+        list.add(
+            GoalItem(
+                aContext.getString(R.string.goal_one),
+                R.drawable.home,
+                GOAL_HOUSE_INDEX,
+                false
+            )
+        )
+        list.add(
+            GoalItem(
+                aContext.getString(R.string.goal_two),
+                R.drawable.collage,
+                GOAL_COLLAGE_INDEX,
+                false
+            )
+        )
+        list.add(
+            GoalItem(
+                aContext.getString(R.string.goal_three),
+                R.drawable.car_app_icon,
+                GOAL_CAR_INDEX,
+                false
+            )
+        )
+        list.add(
+            GoalItem(
+                aContext.getString(R.string.goal_four),
+                R.drawable.vacation,
+                GOAL_VACATION_INDEX,
+                false
+            )
+        )
+        list.add(
+            GoalItem(
+                aContext.getString(R.string.goal_five),
+                R.drawable.retire,
+                GOAL_RETIRE_INDEX,
+                false
+            )
+        )
+        list.add(
+            GoalItem(
+                aContext.getString(R.string.goal_six),
+                R.drawable.shopping,
+                GOAL_SHOPPING_INDEX,
+                false
+            )
+        )
         return list
 
     }
@@ -177,12 +291,12 @@ class AppManager private constructor()  {
 
     fun getIconForGOalIndex(aIndex : Int) : Int{
         when(aIndex){
-            GOAL_HOUSE_INDEX-> return R.drawable.home
-            GOAL_COLLAGE_INDEX-> return R.drawable.collage
-            GOAL_CAR_INDEX-> return R.drawable.car_app_icon
-            GOAL_VACATION_INDEX-> return R.drawable.vacation
-            GOAL_RETIRE_INDEX-> return R.drawable.retire
-            GOAL_SHOPPING_INDEX-> return R.drawable.shopping
+            GOAL_HOUSE_INDEX -> return R.drawable.home
+            GOAL_COLLAGE_INDEX -> return R.drawable.collage
+            GOAL_CAR_INDEX -> return R.drawable.car_app_icon
+            GOAL_VACATION_INDEX -> return R.drawable.vacation
+            GOAL_RETIRE_INDEX -> return R.drawable.retire
+            GOAL_SHOPPING_INDEX -> return R.drawable.shopping
         }
         return  R.drawable.goal_image
     }

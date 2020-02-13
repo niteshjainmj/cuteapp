@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.moneytruth.R
-import com.moneytruth.dummy.AppManager
+import com.moneytruth.app.AppManager
 
-import com.moneytruth.dummy.SettingMenuItem
+import com.moneytruth.app.SettingMenuItem
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
 import kotlinx.android.synthetic.main.item_list.*

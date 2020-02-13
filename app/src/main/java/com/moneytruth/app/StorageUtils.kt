@@ -1,4 +1,4 @@
-package com.moneytruth.dummy
+package com.moneytruth.app
 
 import android.content.Context
 import android.content.SharedPreferences

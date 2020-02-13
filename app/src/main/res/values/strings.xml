@@ -11,7 +11,7 @@
     <string name="btn_transfer">Transfer</string>
     <string name="btn_deposit">Deposit</string>
     <string name="btn_withdraw">Withdraw</string>
-    <string name="home_piggi_label">Piggi Bank</string>
+    <string name="home_piggi_label">Piggy Bank</string>
 
     <string name="home_bank_label">Saving Account</string>
 
@@ -31,7 +31,7 @@
 
 
     <string name="ui_bg_label">Background Color</string>
-    <string name="ui_piggi_label">Piggi Bank Background Color</string>
+    <string name="ui_piggi_label">Piggy Bank Background Color</string>
     <string name="ui_saving_label">Saving Bank Background Color</string>
     <string name="ui_btn_label">App Buttons Background Color</string>
     <string name="ui_save_btn_label">Save Changes</string>
@@ -67,22 +67,22 @@
 
     <string name="transfer_dialog_title">Transfer</string>
     <string name="transfer_dialog_msg">Please enter amount</string>
-    <string name="transfer_dialog_piggi_to">Piggi Bank to Saving Account</string>
-    <string name="transfer_dialog_bank_to">Saving Account to Piggi Bank</string>
+    <string name="transfer_dialog_piggi_to">Piggy Bank to Saving Account</string>
+    <string name="transfer_dialog_bank_to">Saving Account to Piggy Bank</string>
     <string name="transfer_dialog_cancel">Cancel</string>
 
 
 
     <string name="withdraw_dialog_title">Withdraw</string>
     <string name="withdraw_dialog_msg">Please enter amount</string>
-    <string name="withdraw_dialog_piggi">From Piggi Bank</string>
+    <string name="withdraw_dialog_piggi">From Piggy Bank</string>
     <string name="withdraw_dialog_bank">From Saving Account</string>
     <string name="withdraw_dialog_cancel">Cancel</string>
 
 
     <string name="deposit_dialog_title">Deposit</string>
     <string name="deposit_dialog_msg">Please enter amount</string>
-    <string name="deposit_dialog_piggi">To Piggi Bank</string>
+    <string name="deposit_dialog_piggi">To Piggy Bank</string>
     <string name="deposit_dialog_bank">To Saving Account</string>
     <string name="deposit_dialog_cancel">Cancel</string>
 

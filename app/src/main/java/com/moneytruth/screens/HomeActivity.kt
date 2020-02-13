@@ -11,23 +11,37 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.moneytruth.R
-import com.moneytruth.dummy.AppManager
-import com.moneytruth.dummy.DecimalDigitsInputFilter
-import com.moneytruth.dummy.GoalDetails
+import com.moneytruth.app.AppManager
+import com.moneytruth.app.DecimalDigitsInputFilter
+import com.moneytruth.app.GoalDetails
+import com.moneytruth.app.TransactionBean
+import com.moneytruth.viewmodels.HomeViewModel
+import com.moneytruth.viewmodels.HomeViewModelFactory
 
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
+import java.math.BigDecimal
+import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
 
     private var mGoalDetails : GoalDetails? = null
+    private lateinit var mViewModel : HomeViewModel
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
+        mViewModel = ViewModelProvider(this, HomeViewModelFactory(application)).get(HomeViewModel::class.java)
+
+                // ViewModelProviders.of(this).get(HomeViewModel::class.java)
         initView()
     }
 
@@ -56,6 +70,13 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.no_goal_selected_error), Toast.LENGTH_SHORT).show()
             }
         }
+
+//        mViewModel.mHistoryList.observe(this, Observer {
+//
+//           val list = it
+//            print(it.count())
+//        })
+
     }
 
     private fun checkError(){
@@ -73,7 +94,12 @@ class HomeActivity : AppCompatActivity() {
         val dialogView = inflater.inflate(R.layout.amount_dialog_layout, null)
         alertDialog.setView(dialogView)
         val editText = dialogView.findViewById(R.id.mEtAddGroup) as EditText
-        editText.setFilters(arrayOf<InputFilter>(DecimalDigitsInputFilter(25, 2)))
+        editText.setFilters(arrayOf<InputFilter>(
+            DecimalDigitsInputFilter(
+                25,
+                2
+            )
+        ))
         alertDialog.setButton(
             DialogInterface.BUTTON_POSITIVE, getString(R.string.withdraw_dialog_bank),
             DialogInterface.OnClickListener { _, _ ->
@@ -118,7 +144,12 @@ class HomeActivity : AppCompatActivity() {
         val dialogView = inflater.inflate(R.layout.amount_dialog_layout, null)
         alertDialog.setView(dialogView)
         val editText = dialogView.findViewById(R.id.mEtAddGroup) as EditText
-        editText.setFilters(arrayOf<InputFilter>(DecimalDigitsInputFilter(25, 2)))
+        editText.setFilters(arrayOf<InputFilter>(
+            DecimalDigitsInputFilter(
+                25,
+                2
+            )
+        ))
         alertDialog.setButton(
             DialogInterface.BUTTON_POSITIVE, getString(R.string.transfer_dialog_bank_to),
             DialogInterface.OnClickListener { _, _ ->
@@ -163,7 +194,12 @@ class HomeActivity : AppCompatActivity() {
         val dialogView = inflater.inflate(R.layout.amount_dialog_layout, null)
         alertDialog.setView(dialogView)
         val editText = dialogView.findViewById(R.id.mEtAddGroup) as EditText
-        editText.setFilters(arrayOf<InputFilter>(DecimalDigitsInputFilter(25, 2)))
+        editText.setFilters(arrayOf<InputFilter>(
+            DecimalDigitsInputFilter(
+                25,
+                2
+            )
+        ))
         alertDialog.setButton(
             DialogInterface.BUTTON_POSITIVE, getString(R.string.deposit_dialog_bank),
             DialogInterface.OnClickListener { _, _ ->

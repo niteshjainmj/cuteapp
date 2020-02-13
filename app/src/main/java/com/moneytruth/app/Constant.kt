@@ -1,0 +1,15 @@
+package com.moneytruth.app
+
+object Constant {
+
+    val TRANSACTION_TYPE_WITHDRAW_INDEX = 1
+    val TRANSACTION_TYPE_DEPOSIT_INDEX = 2
+    val TRANSACTION_TYPE_TRANSFER_INDEX = 3
+
+
+    val SOURCE_TYPE_SAVING_ACCOUNT = 1
+    val SOURCE_TYPE_PIGGI_BANK = 2
+    val SOURCE_TYPE_OTHER = 3
+
+
+}
