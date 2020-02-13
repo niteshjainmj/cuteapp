@@ -11,21 +11,16 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.moneytruth.R
 import com.moneytruth.app.AppManager
 import com.moneytruth.app.DecimalDigitsInputFilter
 import com.moneytruth.app.GoalDetails
-import com.moneytruth.app.TransactionBean
 import com.moneytruth.viewmodels.HomeViewModel
 import com.moneytruth.viewmodels.HomeViewModelFactory
 
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
-import java.math.BigDecimal
-import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -39,6 +34,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
+        setTitle("")
         mViewModel = ViewModelProvider(this, HomeViewModelFactory(application)).get(HomeViewModel::class.java)
 
                 // ViewModelProviders.of(this).get(HomeViewModel::class.java)
@@ -278,7 +274,7 @@ class HomeActivity : AppCompatActivity() {
             year = getString(R.string.home_year_type_label) + " - "+
                     mGoalDetails?.mYears + " " +  getString(R.string.year_label)
             amount = getString(R.string.home_total_type_label) + " - $ " + mGoalDetails?.mAmount
-            icon = AppManager.manager.getIconForGOalIndex(mGoalDetails!!.mGoalIndex)
+            icon = AppManager.manager.getIconForGoalIndex(mGoalDetails!!.mGoalIndex)
         }
 
         mTvSavingGoalName.text = title

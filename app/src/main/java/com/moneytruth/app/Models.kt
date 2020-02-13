@@ -2,6 +2,7 @@ package com.moneytruth.app
 
 import android.text.InputFilter
 import android.text.Spanned
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -11,7 +12,8 @@ data class SettingMenuItem(var mTitle : String, var mIndex : Int)
 data class GoalItem(var mTitle : String, var mIcon :Int, var mIndex : Int, var mSelected : Boolean)
 
 
-data class GoalDetails(var mGoalIndex : Int, var mGoalName : String, var mYears : Int, var mAmount : String)
+data class GoalDetails(var mGoalIndex : Int, var mGoalName : String, var mYears : Int, var mAmount : String,
+                       var mInterestRate : Double ,var mStartDate : Date)
 
 
 class DecimalDigitsInputFilter(digitsBeforeZero: Int, digitsAfterZero: Int) :

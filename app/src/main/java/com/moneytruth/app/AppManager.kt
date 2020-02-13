@@ -4,12 +4,18 @@ import android.content.Context
 import android.graphics.Color
 import androidx.core.content.ContextCompat
 import com.moneytruth.R
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AppManager private constructor()  {
 
 
     companion object {
+
+        const val DEFAULT_INTEREST_RATE = 12.0
+
         const val SETTING_GOAL_INDEX = 1
         const val SETTING_UI_INDEX = 2
         const val SETTING_HISTORY_INDEX = 3
@@ -32,6 +38,9 @@ class AppManager private constructor()  {
         const val SHARED_PREF_GOAL_TITLE_KEY = "goal_title"
         const val SHARED_PREF_GOAL_YEAR_KEY = "goal_year"
         const val SHARED_PREF_GOAL_AMOUNT_KEY = "goal_amount"
+        const val SHARED_PREF_GOAL_START_DATE = "goal_date"
+
+        const val SHARED_PREF_BASIC_INTEREST_RATE_KEY = "saving_interest_rate"
 
         private var smManager: AppManager? = null
 
@@ -67,6 +76,14 @@ class AppManager private constructor()  {
                 SHARED_PREF_GOAL_YEAR_KEY,
                 aGaolItem.mYears
             )
+
+            StorageUtils.putPref(aContext, SHARED_PREF_GOAL_START_DATE, aGaolItem.mStartDate.time)
+
+
+            val nf: NumberFormat = NumberFormat.getNumberInstance()
+            nf.maximumFractionDigits = 2
+            val interestStr: String = nf.format(aGaolItem.mInterestRate)
+            StorageUtils.putPref(aContext, SHARED_PREF_BASIC_INTEREST_RATE_KEY, interestStr)
         }
     }
 
@@ -90,16 +107,69 @@ class AppManager private constructor()  {
                 SHARED_PREF_GOAL_YEAR_KEY
             )
 
+            val startDate = StorageUtils.getPrefForLong(aContext, SHARED_PREF_GOAL_START_DATE)
+            var interestRate = StorageUtils.getPrefStr(aContext, SHARED_PREF_BASIC_INTEREST_RATE_KEY)
+            if(interestRate == null){
+                interestRate = DEFAULT_INTEREST_RATE.toString()
+            }
+
             return GoalDetails(
                 index,
                 goalName,
                 years,
-                amount!!
+                amount!!,
+                interestRate.toDouble(),
+                Date(startDate)
             )
         }
         return null
     }
 
+
+    fun getSavingInterestRate(): Double{
+        var rate = DEFAULT_INTEREST_RATE
+
+
+
+        return rate
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //////---THEME SETTING -----------
 
     fun setBackgroundColor(aContext : Context, aColorStr : String?){
         if(aColorStr != null){
@@ -289,7 +359,7 @@ class AppManager private constructor()  {
     }
 
 
-    fun getIconForGOalIndex(aIndex : Int) : Int{
+    fun getIconForGoalIndex(aIndex : Int) : Int{
         when(aIndex){
             GOAL_HOUSE_INDEX -> return R.drawable.home
             GOAL_COLLAGE_INDEX -> return R.drawable.collage
@@ -300,6 +370,19 @@ class AppManager private constructor()  {
         }
         return  R.drawable.goal_image
     }
+
+    fun getSelectedGoalIndexForList(aIndex : Int) : Int{
+        when(aIndex){
+            GOAL_HOUSE_INDEX -> return 0
+            GOAL_COLLAGE_INDEX -> return 1
+            GOAL_CAR_INDEX -> return 2
+            GOAL_VACATION_INDEX -> return 3
+            GOAL_RETIRE_INDEX -> return 4
+            GOAL_SHOPPING_INDEX -> return 5
+        }
+        return  -1
+    }
+
 
 
 //    init {

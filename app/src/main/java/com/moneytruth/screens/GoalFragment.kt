@@ -16,6 +16,10 @@ import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
 import kotlinx.android.synthetic.main.fragment_goal.*
+import java.math.BigDecimal
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class GoalFragment : Fragment() {
@@ -23,7 +27,8 @@ class GoalFragment : Fragment() {
 
     var mAllGoalItem = ArrayList<GoalItem>()
     var mSelectedIndex  = -1
-    var mHaveGoal = false
+
+    var mGoalDetails : GoalDetails? = null
 
 
     override fun onCreateView(
@@ -37,11 +42,58 @@ class GoalFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+
     }
 
     private fun initView() {
+        //Added Balance system
+        mEtBalance.setFilters(arrayOf<InputFilter>(
+            DecimalDigitsInputFilter(
+                25,
+                2
+            )
+        ))
+
+        mEtGoalInterest.setFilters(arrayOf<InputFilter>(
+            DecimalDigitsInputFilter(
+                4,
+                2
+            )
+        ))
+
+
+        mGoalDetails = AppManager.manager.getSavedGoalDetails(activity as Context)
+        if (mGoalDetails != null){
+            mSelectedIndex = AppManager.manager.getSelectedGoalIndexForList(mGoalDetails!!.mGoalIndex)
+
+
+            val bigDecimal = BigDecimal(mGoalDetails!!.mAmount)
+            bigDecimal.setScale(2, BigDecimal.ROUND_UP)
+            mEtBalance.setText(bigDecimal.toString())
+
+            val nf: NumberFormat = NumberFormat.getNumberInstance()
+            nf.maximumFractionDigits = 2
+            val rounded: String = nf.format(mGoalDetails!!.mInterestRate)
+            mEtGoalInterest.setText(rounded)
+
+            //Year selector
+
+            mIndicatorSeekBar.setProgress(mGoalDetails!!.mYears.toFloat())
+            val selectedVal = "" + mGoalDetails!!.mYears + " Years"
+            mTvGoalYear.setText(selectedVal)
+
+        }else{
+            var defaultInterestRate = "" + AppManager.DEFAULT_INTEREST_RATE
+            mEtGoalInterest.setText(defaultInterestRate)
+
+            val selectedVal = "" + mIndicatorSeekBar.min.toInt() + " Years"
+            mTvGoalYear.setText(selectedVal)
+
+        }
+
 
         //Set goal list
+        mAllGoalItem = AppManager.manager.getAllGoalList(activity as Context)
         val layoutManager = GridLayoutManager(activity, 5)
         mRvGoal.layoutManager = layoutManager
 //        val dividerItemDecoration = DividerItemDecoration(
@@ -49,7 +101,7 @@ class GoalFragment : Fragment() {
 //            layoutManager.getOrientation()
 //        )
         //mRvGoal.addItemDecoration(dividerItemDecoration)
-        mAllGoalItem = AppManager.manager.getAllGoalList(activity as Context)
+
 
         val adapter = GoalAdapter(
             activity as Context,
@@ -61,13 +113,7 @@ class GoalFragment : Fragment() {
         mRvGoal.adapter = adapter
 
 
-    //Added Balance system
-        mEtBalance.setFilters(arrayOf<InputFilter>(
-            DecimalDigitsInputFilter(
-                25,
-                2
-            )
-        ))
+
 
 
         //Year range handler
@@ -75,8 +121,6 @@ class GoalFragment : Fragment() {
 //
 //        }
 
-        val selectedVal = "" + mIndicatorSeekBar.min.toInt() + " Years"
-        mTvGoalYear.setText(selectedVal)
 
         mIndicatorSeekBar.setOnSeekChangeListener(object : OnSeekChangeListener {
             override fun onSeeking(seekParams: SeekParams) {
@@ -97,12 +141,14 @@ class GoalFragment : Fragment() {
 
         mGoalBtnSave.setBackgroundColor(AppManager.manager.getBtnBgColor(activity as Context))
         mGoalBtnSave.setOnClickListener {
-            if(isValidGoal() &&  isValidAmount()){
+            if(isValidGoal() &&  isValidAmount() && isValidInterestRate()){
                 var goalItem = GoalDetails(
                     mAllGoalItem[mSelectedIndex].mIndex,
                     mAllGoalItem[mSelectedIndex].mTitle,
                     mAmount = mEtBalance.text.toString().trim(),
-                    mYears = mIndicatorSeekBar.progress.toInt()
+                    mYears = mIndicatorSeekBar.progress.toInt(),
+                    mInterestRate = mEtGoalInterest.text.toString().trim().toDouble(),
+                    mStartDate = Date()
                 )
                 AppManager.manager.saveGoalDetails(activity as Context, goalItem)
 
@@ -131,6 +177,25 @@ class GoalFragment : Fragment() {
             valid = true
         }else{
             Toast.makeText(activity, getString(R.string.goal_amount_error_msg), Toast.LENGTH_SHORT).show()
+        }
+
+        return valid
+    }
+
+    fun isValidInterestRate() : Boolean{
+        var valid = false
+        val interestRateStr  = mEtGoalInterest.text.toString().trim()
+        if(interestRateStr.isNotEmpty()){
+            var checkZero = interestRateStr.toDouble()
+            if(checkZero != 0.0){
+                valid = true
+            }else{
+                Toast.makeText(activity, getString(R.string.goal_interest_error_msg), Toast.LENGTH_SHORT).show()
+            }
+
+        }else{
+            Toast.makeText(activity, getString(R.string.goal_interest_error_msg), Toast.LENGTH_SHORT).show()
+
         }
 
         return valid

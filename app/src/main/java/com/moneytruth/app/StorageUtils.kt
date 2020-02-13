@@ -28,6 +28,14 @@ object StorageUtils {
         return editor.commit()
     }
 
+
+    fun putPref(context: Context, key: String, value: Long): Boolean {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = prefs.edit()
+        editor.putLong(key, value)
+        return editor.commit()
+    }
+
     fun putPref(context: Context, key: String, value: Boolean) : Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = prefs.edit()
@@ -43,6 +51,12 @@ object StorageUtils {
     fun getPrefForInt(context: Context, key: String): Int {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         return preferences.getInt(key, -1)
+    }
+
+
+    fun getPrefForLong(context: Context, key: String): Long {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        return preferences.getLong(key, 0)
     }
 
     fun getPrefForBool(context: Context, key: String): Boolean {
