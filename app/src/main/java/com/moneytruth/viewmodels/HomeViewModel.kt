@@ -188,7 +188,11 @@ class HomeViewModel (application : Application) : ViewModel(){
             addTransactionInDB(transactionBean)
             updateFlag.postValue(true)
         }
+    }
 
+    fun checkDailyUpdater(aContext : Context){
+        AppManager.manager.checkDailyUpdater(aContext)
+        updateFlag.postValue(true)
     }
 
 

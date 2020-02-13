@@ -337,9 +337,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         mViewModel.mGoalDetails?.postValue(AppManager.manager.getSavedGoalDetails(this))
         updateUI()
+        mViewModel.checkDailyUpdater(this)
     }
 
     fun updateUI(){

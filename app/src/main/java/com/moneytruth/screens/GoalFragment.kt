@@ -151,6 +151,7 @@ class GoalFragment : Fragment() {
                     mStartDate = Date()
                 )
                 AppManager.manager.saveGoalDetails(activity as Context, goalItem)
+                AppManager.manager.setUpdaterDate(activity as Context, Date())
 
                 Toast.makeText(activity, getString(R.string.goal_save_sucess), Toast.LENGTH_SHORT).show()
             }

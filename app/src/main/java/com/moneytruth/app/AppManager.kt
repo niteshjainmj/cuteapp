@@ -4,8 +4,11 @@ import android.content.Context
 import android.graphics.Color
 import androidx.core.content.ContextCompat
 import com.moneytruth.R
+import org.joda.time.DateTime
+import org.joda.time.DateTimeComparator
 import java.math.BigDecimal
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -44,15 +47,14 @@ class AppManager private constructor()  {
 
 
         const val SHARED_PREF_BASIC_INTEREST_RATE_KEY = "saving_interest_rate"
-
         const val SHARED_PREF_SAVING_ACC_AMOUNT_KEY = "save_account_balance"
-        const val SHARED_PREF_SAVING_ACC_TOTAL_DEPOSIT_KEY = "save_account_deposit"
-        const val SHARED_PREF_SAVING_ACC_TOTAL_WITHDRAW_KEY = "save_account_withdraw"
 
 
         const val SHARED_PREF_PIGGY_BANK_RATE_KEY = "piggy_bank_inflation_rate"
         const val SHARED_PREF_PIGGY_BANK_KEY = "piggy_bank_balance"
 
+
+        const val SHARED_PREF_UPDATER_DATE_KEY = "updater_date"
         private var smManager: AppManager? = null
 
         val manager: AppManager
@@ -182,11 +184,45 @@ class AppManager private constructor()  {
 
 
 
+    fun setUpdaterDate(aContext: Context, aDate : Date){
+        val outFormat = SimpleDateFormat("dd-MM-yyyy", Locale.US)
+        val  dateStr = outFormat.format(aDate)
+        StorageUtils.putPref(aContext, SHARED_PREF_UPDATER_DATE_KEY, dateStr)
+    }
+
+    fun getUpdaterDate(aContext: Context): Date?{
+        var dateStr = StorageUtils.getPrefStr(aContext, SHARED_PREF_UPDATER_DATE_KEY)
+        if(dateStr!= null){
+            val formatter: SimpleDateFormat =  SimpleDateFormat("dd-MM-yyyy", Locale.US)
+           return formatter.parse(dateStr)
+        }else{
+            return null
+        }
+    }
 
 
 
 
-
+    fun checkDailyUpdater(aContext : Context){
+        val oldDate = getUpdaterDate(aContext)
+        if(oldDate != null){
+            val newDate = Date()
+           val resultIndex =  DateTimeComparator.getDateOnlyInstance().compare(oldDate, newDate);
+            if(resultIndex < 0){
+                val goal = getSavedGoalDetails(aContext)
+                if(goal != null){
+                    //update daily interest value for saving account
+                    val newSaveVal = getCompoundInterestOneDay(getSavingAccountBalance(aContext), goal.mInterestRate)
+                    setSavingAccountBalance(aContext, newSaveVal)
+                    //Decrease daily inflation value for piggy bank account
+                    val newPiggyBankVal = getInflationBasedValueForOneDay(getPiggyBankBalance(aContext), getInflationRate(aContext))
+                    setPiggyBankBalance(aContext, newPiggyBankVal)
+                    //Update date to next day
+                    setUpdaterDate(aContext, Date())
+                }
+            }
+        }
+    }
 
 
 
