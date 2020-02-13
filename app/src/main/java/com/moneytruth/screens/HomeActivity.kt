@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.moneytruth.R
 import com.moneytruth.app.AppManager
@@ -24,11 +25,7 @@ import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : AppCompatActivity() {
 
-
-    private var mGoalDetails : GoalDetails? = null
     private lateinit var mViewModel : HomeViewModel
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +40,8 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initView() {
         mHomeWithdrawBtn.setOnClickListener{
-            if(mGoalDetails != null){
+
+            if(mViewModel.mGoalDetails?.value != null){
                 showWithDrawDialog()
             }else{
                 Toast.makeText(this, getString(R.string.no_goal_selected_error), Toast.LENGTH_SHORT).show()
@@ -51,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         mHomeTransferBtn.setOnClickListener{
-            if(mGoalDetails != null){
+            if(mViewModel.mGoalDetails?.value != null){
                 showTransferDialog()
             }else{
                 Toast.makeText(this, getString(R.string.no_goal_selected_error), Toast.LENGTH_SHORT).show()
@@ -60,18 +58,46 @@ class HomeActivity : AppCompatActivity() {
         }
 
         mHomeDepositBtn.setOnClickListener{
-            if(mGoalDetails != null){
+            if(mViewModel.mGoalDetails?.value != null){
                 showDepositDialog()
             }else{
                 Toast.makeText(this, getString(R.string.no_goal_selected_error), Toast.LENGTH_SHORT).show()
             }
         }
 
+
+        mViewModel.mMsgSender.observe(this, Observer {
+            if(it.isNotEmpty()){
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
+
 //        mViewModel.mHistoryList.observe(this, Observer {
 //
 //           val list = it
 //            print(it.count())
 //        })
+
+
+        mViewModel.mGoalDetails?.observe(this, Observer {
+                var title = getString(R.string.home_saving_type_label) + " - "
+                var year = getString(R.string.year_label) + " - "
+                var amount = getString(R.string.home_total_type_label) + " - "
+                var icon  = R.drawable.goal_image
+
+                if(mViewModel.mGoalDetails?.value != null){
+                    title =  getString(R.string.home_saving_type_label) + " - "+  mViewModel.mGoalDetails?.value?.mGoalName
+                    year = getString(R.string.home_year_type_label) + " - "+
+                            mViewModel.mGoalDetails?.value?.mYears + " " +  getString(R.string.year_label)
+                    amount = getString(R.string.home_total_type_label) + " - $ " +  mViewModel.mGoalDetails?.value?.mAmount
+                    icon = AppManager.manager.getIconForGoalIndex( mViewModel.mGoalDetails?.value!!.mGoalIndex)
+                }
+
+                mTvSavingGoalName.text = title
+                mTvSavingGoalYear.text = year
+                mTvSavingGoalAmount.text = amount
+                mIvSavingGoalIcon.setImageResource(icon)
+        })
 
     }
 
@@ -247,40 +273,22 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        mViewModel.mGoalDetails?.postValue(AppManager.manager.getSavedGoalDetails(this))
         updateUI()
     }
 
     fun updateUI(){
-        mGoalDetails = AppManager.manager.getSavedGoalDetails(this)
         val appManager = AppManager.manager
         mHomeMainView.setBackgroundColor(appManager.getBgColor(this))
         mCvPiggiHome.setCardBackgroundColor(appManager.getPiggiBgColor(this))
         mCvSavingHome.setCardBackgroundColor(appManager.getSavingBgColor(this))
-
-
 
         mHomeDepositBtn.setBackgroundColor(appManager.getBtnBgColor(this))
         mHomeWithdrawBtn.setBackgroundColor(appManager.getBtnBgColor(this))
         mHomeTransferBtn.setBackgroundColor(appManager.getBtnBgColor(this))
 
 
-        var title = getString(R.string.home_saving_type_label) + " - "
-        var year = getString(R.string.year_label) + " - "
-        var amount = getString(R.string.home_total_type_label) + " - "
-        var icon  = R.drawable.goal_image
-
-        if(mGoalDetails != null){
-            title =  getString(R.string.home_saving_type_label) + " - "+  mGoalDetails?.mGoalName
-            year = getString(R.string.home_year_type_label) + " - "+
-                    mGoalDetails?.mYears + " " +  getString(R.string.year_label)
-            amount = getString(R.string.home_total_type_label) + " - $ " + mGoalDetails?.mAmount
-            icon = AppManager.manager.getIconForGoalIndex(mGoalDetails!!.mGoalIndex)
-        }
-
-        mTvSavingGoalName.text = title
-        mTvSavingGoalYear.text = year
-        mTvSavingGoalAmount.text = amount
-        mIvSavingGoalIcon.setImageResource(icon)
 
     }
 

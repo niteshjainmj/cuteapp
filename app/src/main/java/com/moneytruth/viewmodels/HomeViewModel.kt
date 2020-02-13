@@ -2,8 +2,10 @@ package com.moneytruth.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moneytruth.app.GoalDetails
 import com.moneytruth.app.TransactionBean
 import com.moneytruth.db.HistoryDatabase
 import com.moneytruth.db.HistoryRepository
@@ -13,6 +15,11 @@ class HomeViewModel (application : Application) : ViewModel(){
 
     private val mRepository : HistoryRepository
     val mHistoryList : LiveData<List<TransactionBean>>
+
+    var mGoalDetails : MutableLiveData<GoalDetails> ? = null
+
+    var mMsgSender : MutableLiveData<String>
+
 //    val mTagList : LiveData<List<GroupTagBean>>
 
 //
@@ -24,6 +31,8 @@ class HomeViewModel (application : Application) : ViewModel(){
         val historyDao = HistoryDatabase.getInstance(application, viewModelScope).historyDao()
         mRepository = HistoryRepository(historyDao)
         mHistoryList = mRepository.allHistory
+        mGoalDetails = MutableLiveData()
+        mMsgSender = MutableLiveData("")
     }
 
     private fun loadContact(){
