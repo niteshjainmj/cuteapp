@@ -11,7 +11,7 @@ import java.util.*
 @Entity(tableName = "history", indices = [(Index(value = ["id"], unique = true))])
 data class TransactionBean(
     @PrimaryKey(autoGenerate = true) var id: Int?,
-    @ColumnInfo(name = "action_index") var actionIndex: Long,
+    @ColumnInfo(name = "action_index") var actionIndex: Int,
     @ColumnInfo(name = "form_source") var fromSource: Int,
     @ColumnInfo(name = "to_source") var toSource: Int,
     @ColumnInfo(name = "amount") var amount: String,

@@ -69,6 +69,8 @@
 
     <string name="no_goal_selected_error">No Goal Selected</string>
     <string name="no_amount_error">Please enter amount</string>
+    <string name="invalid_amount">Invalid Amount</string>
+    <string name="insufficient_balance_error">Insufficient balance</string>
 
 
     <string name="transfer_dialog_title">Transfer</string>
@@ -94,5 +96,4 @@
 
 
     <string name="year_label">Years</string>
-
 </resources>

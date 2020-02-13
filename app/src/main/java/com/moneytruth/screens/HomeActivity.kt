@@ -20,6 +20,7 @@ import com.moneytruth.viewmodels.HomeViewModelFactory
 
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.content_home.*
+import java.math.BigDecimal
 
 class HomeActivity : AppCompatActivity() {
 
@@ -90,6 +91,7 @@ class HomeActivity : AppCompatActivity() {
 
         })
 
+
 //        mViewModel.mHistoryList.observe(this, Observer {
 //
 //           val list = it
@@ -146,15 +148,17 @@ class HomeActivity : AppCompatActivity() {
             DialogInterface.BUTTON_POSITIVE, getString(R.string.withdraw_dialog_bank),
             DialogInterface.OnClickListener { _, _ ->
                 // here you can add_group_dialog_layout functions
-                val tagStr = editText.text.toString().trim()
-                checkError()
-                if (tagStr.length < 1) {
-
-                    //(activity as Context).toast(getString(R.string.contact_group_add_invalid))
-                } else{
-
+                val amountStr = editText.text.toString().trim()
+                if(amountStr.isNotEmpty()){
+                    val moneyBigDecimal = BigDecimal(amountStr)
+                    if(moneyBigDecimal.compareTo(BigDecimal.ZERO) > 0){
+                        mViewModel.handleSaveWithDraw(moneyBigDecimal, this)
+                    }else{
+                        showToast(getString(R.string.invalid_amount))
+                    }
+                }else{
+                    showToast(getString(R.string.no_amount_error))
                 }
-
             })
 
         alertDialog.setButton(
@@ -230,7 +234,7 @@ class HomeActivity : AppCompatActivity() {
         val alertDialog = AlertDialog.Builder(this).create() //Read Update
         alertDialog.setTitle(getString(R.string.deposit_dialog_title))
         alertDialog.setMessage(getString(R.string.deposit_dialog_msg))
-
+        alertDialog.setCancelable(false)
 
         val inflater = this.layoutInflater
         val dialogView = inflater.inflate(R.layout.amount_dialog_layout, null)
@@ -245,15 +249,18 @@ class HomeActivity : AppCompatActivity() {
         alertDialog.setButton(
             DialogInterface.BUTTON_POSITIVE, getString(R.string.deposit_dialog_bank),
             DialogInterface.OnClickListener { _, _ ->
-                checkError()
-                // here you can add_group_dialog_layout functions
-                val tagStr = editText.text.toString().trim()
-                if (tagStr.length < 1) {
-
-                    //(activity as Context).toast(getString(R.string.contact_group_add_invalid))
-                } else{
-
+                val amountStr = editText.text.toString().trim()
+                if(amountStr.isNotEmpty()){
+                   val moneyBigDecimal = BigDecimal(amountStr)
+                    if(moneyBigDecimal.compareTo(BigDecimal.ZERO) > 0){
+                        mViewModel.handleSaveDeposit(moneyBigDecimal, this)
+                    }else{
+                        showToast(getString(R.string.invalid_amount))
+                    }
+                }else{
+                    showToast(getString(R.string.no_amount_error))
                 }
+
 
             })
 
@@ -310,6 +317,10 @@ class HomeActivity : AppCompatActivity() {
 
 
 
+    }
+
+    fun showToast(aStr : String){
+        Toast.makeText(this, aStr, Toast.LENGTH_SHORT).show()
     }
 
 }
