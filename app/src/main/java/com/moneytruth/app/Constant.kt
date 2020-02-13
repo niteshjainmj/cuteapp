@@ -1,5 +1,8 @@
 package com.moneytruth.app
 
+import java.math.BigDecimal
+import java.text.NumberFormat
+
 object Constant {
 
     val TRANSACTION_TYPE_WITHDRAW_INDEX = 1
@@ -12,4 +15,23 @@ object Constant {
     val SOURCE_TYPE_OTHER = 3
 
 
+}
+
+
+fun getDoubleToString(aDouble : Double, aFractionDigit : Int = 2) : String{
+    val nf: NumberFormat = NumberFormat.getNumberInstance()
+    nf.maximumFractionDigits = aFractionDigit
+    return nf.format(aDouble)
+}
+
+
+fun getBigDecimalToString(aBigDec : BigDecimal, aFraction :Int = 2): String{
+    val bigData = BigDecimal(aBigDec.toString())
+    return bigData.setScale(aFraction,  BigDecimal.ROUND_UP).toString()
+}
+
+
+fun getCompoundInterestString(aBasicValue : BigDecimal, aRate : Double, aYears : Int ) : String{
+    var data  = aBasicValue *  BigDecimal(Math.pow((1 + aRate / 100), aYears.toDouble()))
+    return getBigDecimalToString(data)
 }

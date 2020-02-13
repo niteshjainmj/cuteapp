@@ -20,6 +20,10 @@ class HomeViewModel (application : Application) : ViewModel(){
 
     var mMsgSender : MutableLiveData<String>
 
+
+    var updateFlag : MutableLiveData<Boolean>
+
+
 //    val mTagList : LiveData<List<GroupTagBean>>
 
 //
@@ -33,6 +37,7 @@ class HomeViewModel (application : Application) : ViewModel(){
         mHistoryList = mRepository.allHistory
         mGoalDetails = MutableLiveData()
         mMsgSender = MutableLiveData("")
+        updateFlag =  MutableLiveData(false)
     }
 
     private fun loadContact(){

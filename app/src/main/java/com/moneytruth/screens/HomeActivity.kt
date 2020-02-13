@@ -14,9 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.moneytruth.R
-import com.moneytruth.app.AppManager
-import com.moneytruth.app.DecimalDigitsInputFilter
-import com.moneytruth.app.GoalDetails
+import com.moneytruth.app.*
 import com.moneytruth.viewmodels.HomeViewModel
 import com.moneytruth.viewmodels.HomeViewModelFactory
 
@@ -72,6 +70,26 @@ class HomeActivity : AppCompatActivity() {
             }
         })
 
+        mViewModel.updateFlag.observe(this, Observer {
+            //Update all saving details
+            var saveInterestRate = getString(R.string.home_bank_interest_label)
+            var saveBalance = getString(R.string.home_bank_current_balance)
+            var saveFuture = getString(R.string.home_bank_future)
+
+
+            if(mViewModel.mGoalDetails?.value != null){
+                saveInterestRate += " : " + getDoubleToString(mViewModel.mGoalDetails?.value!!.mInterestRate) + " %"
+                saveBalance += " $ : " + getBigDecimalToString(AppManager.manager.getSavingAccountBalance(this))
+                saveFuture +=  " $ : " + getCompoundInterestString(AppManager.manager.getSavingAccountBalance(this),
+                    mViewModel.mGoalDetails!!.value!!.mInterestRate,  mViewModel.mGoalDetails!!.value!!.mYears)
+            }
+
+            mTvHomeSavingIntrestRate.text = saveInterestRate
+            mTvHomeSavingBalance.text = saveBalance
+            mTvHomeSavingFuture.text = saveFuture
+
+        })
+
 //        mViewModel.mHistoryList.observe(this, Observer {
 //
 //           val list = it
@@ -97,6 +115,8 @@ class HomeActivity : AppCompatActivity() {
                 mTvSavingGoalYear.text = year
                 mTvSavingGoalAmount.text = amount
                 mIvSavingGoalIcon.setImageResource(icon)
+
+            mViewModel.updateFlag.postValue(true)
         })
 
     }

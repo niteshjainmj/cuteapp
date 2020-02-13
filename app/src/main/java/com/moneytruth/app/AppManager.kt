@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import androidx.core.content.ContextCompat
 import com.moneytruth.R
+import java.math.BigDecimal
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -42,6 +43,10 @@ class AppManager private constructor()  {
 
 
         const val SHARED_PREF_BASIC_INTEREST_RATE_KEY = "saving_interest_rate"
+
+        const val SHARED_PREF_SAVING_ACC_AMOUNT_KEY = "save_account_balance"
+        const val SHARED_PREF_SAVING_ACC_TOTAL_DEPOSITE_KEY = "save_account_deposit"
+        const val SHARED_PREF_SAVING_ACC_TOTAL_WITHDRAW_KEY = "save_account_withdraw"
 
         private var smManager: AppManager? = null
 
@@ -127,17 +132,21 @@ class AppManager private constructor()  {
     }
 
 
-    fun getSavingInterestRate(): Double{
-        var rate = DEFAULT_INTEREST_RATE
 
 
-
-        return rate
-
+    fun setSavingAccountBalance(aContext : Context, aAmountBigDecimal : BigDecimal){
+        StorageUtils.putPref(aContext, SHARED_PREF_SAVING_ACC_AMOUNT_KEY, aAmountBigDecimal.toString())
     }
 
 
-
+    fun getSavingAccountBalance(aContext: Context): BigDecimal{
+        var obj = BigDecimal(0.0)
+        var str = StorageUtils.getPrefStr(aContext, SHARED_PREF_SAVING_ACC_AMOUNT_KEY)
+        if(str != null){
+            obj = BigDecimal(str)
+        }
+        return obj
+    }
 
 
 

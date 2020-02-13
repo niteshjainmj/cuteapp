@@ -20,6 +20,8 @@
     <string name="home_piggi_future">Future Value</string>
 
     <string name="home_bank_interest_label">Interest Rate</string>
+    <string name="home_bank_current_balance">Current Balance</string>
+    <string name="home_bank_future">Future Value</string>
 
 
     <string name="setting_goal_title">Select Your Goal</string>
