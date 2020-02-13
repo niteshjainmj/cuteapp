@@ -16,6 +16,7 @@ class AppManager private constructor()  {
     companion object {
 
         const val DEFAULT_INTEREST_RATE = 12.0
+        const val DEFAULT_INFLATION_RATE = 2.3
 
         const val SETTING_GOAL_INDEX = 1
         const val SETTING_UI_INDEX = 2
@@ -45,8 +46,12 @@ class AppManager private constructor()  {
         const val SHARED_PREF_BASIC_INTEREST_RATE_KEY = "saving_interest_rate"
 
         const val SHARED_PREF_SAVING_ACC_AMOUNT_KEY = "save_account_balance"
-        const val SHARED_PREF_SAVING_ACC_TOTAL_DEPOSITE_KEY = "save_account_deposit"
+        const val SHARED_PREF_SAVING_ACC_TOTAL_DEPOSIT_KEY = "save_account_deposit"
         const val SHARED_PREF_SAVING_ACC_TOTAL_WITHDRAW_KEY = "save_account_withdraw"
+
+
+        const val SHARED_PREF_PIGGY_BANK_RATE_KEY = "piggy_bank_inflation_rate"
+        const val SHARED_PREF_PIGGY_BANK_KEY = "piggy_bank_balance"
 
         private var smManager: AppManager? = null
 
@@ -132,6 +137,17 @@ class AppManager private constructor()  {
     }
 
 
+    fun getInflationRate(aContext: Context) : Double{
+        var inflationRate = DEFAULT_INFLATION_RATE
+
+        var inflationRateStr = StorageUtils.getPrefStr(aContext, SHARED_PREF_PIGGY_BANK_RATE_KEY)
+        if(inflationRateStr != null){
+           inflationRate = inflationRateStr.toDouble()
+        }
+        return inflationRate
+    }
+
+
 
 
     fun setSavingAccountBalance(aContext : Context, aAmountBigDecimal : BigDecimal){
@@ -150,7 +166,19 @@ class AppManager private constructor()  {
 
 
 
+    fun setPiggyBankBalance(aContext : Context, aAmountBigDecimal : BigDecimal){
+        StorageUtils.putPref(aContext, SHARED_PREF_PIGGY_BANK_KEY, aAmountBigDecimal.toString())
+    }
 
+
+    fun getPiggyBankBalance(aContext: Context): BigDecimal{
+        var obj = BigDecimal(0.0)
+        var str = StorageUtils.getPrefStr(aContext, SHARED_PREF_PIGGY_BANK_KEY)
+        if(str != null){
+            obj = BigDecimal(str)
+        }
+        return obj
+    }
 
 
 

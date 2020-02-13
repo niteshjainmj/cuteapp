@@ -35,3 +35,23 @@ fun getCompoundInterestString(aBasicValue : BigDecimal, aRate : Double, aYears :
     var data  = aBasicValue *  BigDecimal(Math.pow((1 + aRate / 100), aYears.toDouble()))
     return getBigDecimalToString(data)
 }
+
+
+fun getInflationBasedValue( aAmount : BigDecimal, aRate : Double,  aYear : Int ) : String{
+    var cost = aAmount
+    val inflation: Double = (aRate * .01) /// 12
+
+    for (i in 1..aYear){
+        println("print$i")
+        cost = (inflation.toBigDecimal() * cost ) + cost;
+
+    }
+
+    println(cost)
+    val  reduceAmount : BigDecimal = cost.minus(aAmount)
+    var remainingAmount = aAmount.minus(reduceAmount)
+    return getBigDecimalToString(remainingAmount)
+
+//    return cost
+
+}

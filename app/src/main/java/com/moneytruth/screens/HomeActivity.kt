@@ -78,17 +78,34 @@ class HomeActivity : AppCompatActivity() {
             var saveFuture = getString(R.string.home_bank_future)
 
 
+            var piggyInflationRate = getString(R.string.home_rate_of_inflation)
+            var piggyBalance = getString(R.string.home_piggi_current_balance)
+            var piggyFuture = getString(R.string.home_piggi_future)
+
+
             if(mViewModel.mGoalDetails?.value != null){
                 saveInterestRate += " : " + getDoubleToString(mViewModel.mGoalDetails?.value!!.mInterestRate) + " %"
                 saveBalance += " $ : " + getBigDecimalToString(AppManager.manager.getSavingAccountBalance(this))
+
                 saveFuture +=  " $ : " + getCompoundInterestString(AppManager.manager.getSavingAccountBalance(this),
                     mViewModel.mGoalDetails!!.value!!.mInterestRate,  mViewModel.mGoalDetails!!.value!!.mYears)
+
+
+                // PIGGY BANK RELATED VALUES
+                piggyInflationRate += " : " + getDoubleToString(AppManager.manager.getInflationRate(this)) + " %"
+                piggyBalance += " $ : " + getBigDecimalToString(AppManager.manager.getPiggyBankBalance(this))
+
+                piggyFuture +=  " $ : " + getInflationBasedValue(AppManager.manager.getPiggyBankBalance(this),
+                    AppManager.manager.getInflationRate(this),  mViewModel.mGoalDetails!!.value!!.mYears)
             }
 
             mTvHomeSavingIntrestRate.text = saveInterestRate
             mTvHomeSavingBalance.text = saveBalance
             mTvHomeSavingFuture.text = saveFuture
 
+            mTvHomePiggyIntrestRate.text = piggyInflationRate
+            mTvHomePiggyBalance.text = piggyBalance
+            mTvHomePiggyFuture.text = piggyFuture
         })
 
 
@@ -123,10 +140,7 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun checkError(){
-        var str : String? = null
-        print(str!!.length)
-    }
+
 
     private fun showWithDrawDialog(){
         val alertDialog = AlertDialog.Builder(this).create() //Read Update
@@ -164,10 +178,17 @@ class HomeActivity : AppCompatActivity() {
         alertDialog.setButton(
             DialogInterface.BUTTON_NEGATIVE, getString(R.string.withdraw_dialog_piggi),
             DialogInterface.OnClickListener { _, _ ->
-                // here you can add_group_dialog_layout functions
-                val tagStr = editText.text.toString().trim()
-                checkError()
-
+                val amountStr = editText.text.toString().trim()
+                if(amountStr.isNotEmpty()){
+                    val moneyBigDecimal = BigDecimal(amountStr)
+                    if(moneyBigDecimal.compareTo(BigDecimal.ZERO) > 0){
+                        mViewModel.handlePiggyWithDraw(moneyBigDecimal, this)
+                    }else{
+                        showToast(getString(R.string.invalid_amount))
+                    }
+                }else{
+                    showToast(getString(R.string.no_amount_error))
+                }
             })
 
         alertDialog.setButton(
@@ -199,25 +220,33 @@ class HomeActivity : AppCompatActivity() {
         alertDialog.setButton(
             DialogInterface.BUTTON_POSITIVE, getString(R.string.transfer_dialog_bank_to),
             DialogInterface.OnClickListener { _, _ ->
-                checkError()
-                // here you can add_group_dialog_layout functions
-                val tagStr = editText.text.toString().trim()
-                if (tagStr.length < 1) {
-
-                    //(activity as Context).toast(getString(R.string.contact_group_add_invalid))
-                } else{
-
+                val amountStr = editText.text.toString().trim()
+                if(amountStr.isNotEmpty()){
+                    val moneyBigDecimal = BigDecimal(amountStr)
+                    if(moneyBigDecimal.compareTo(BigDecimal.ZERO) > 0){
+                        mViewModel.handleTransferSavingToPiggyBank(moneyBigDecimal, this)
+                    }else{
+                        showToast(getString(R.string.invalid_amount))
+                    }
+                }else{
+                    showToast(getString(R.string.no_amount_error))
                 }
-
             })
 
         alertDialog.setButton(
             DialogInterface.BUTTON_NEGATIVE, getString(R.string.transfer_dialog_piggi_to),
             DialogInterface.OnClickListener { _, _ ->
-                // here you can add_group_dialog_layout functions
-                checkError()
-                val tagStr = editText.text.toString().trim()
-
+                val amountStr = editText.text.toString().trim()
+                if(amountStr.isNotEmpty()){
+                    val moneyBigDecimal = BigDecimal(amountStr)
+                    if(moneyBigDecimal.compareTo(BigDecimal.ZERO) > 0){
+                        mViewModel.handleTransferPiggyBankToSaving(moneyBigDecimal, this)
+                    }else{
+                        showToast(getString(R.string.invalid_amount))
+                    }
+                }else{
+                    showToast(getString(R.string.no_amount_error))
+                }
             })
 
         alertDialog.setButton(
@@ -267,9 +296,17 @@ class HomeActivity : AppCompatActivity() {
         alertDialog.setButton(
             DialogInterface.BUTTON_NEGATIVE, getString(R.string.deposit_dialog_piggi),
             DialogInterface.OnClickListener { _, _ ->
-                // here you can add_group_dialog_layout functions
-                checkError()
-                val tagStr = editText.text.toString().trim()
+                val amountStr = editText.text.toString().trim()
+                if(amountStr.isNotEmpty()){
+                    val moneyBigDecimal = BigDecimal(amountStr)
+                    if(moneyBigDecimal.compareTo(BigDecimal.ZERO) > 0){
+                        mViewModel.handlePiggyDeposit(moneyBigDecimal, this)
+                    }else{
+                        showToast(getString(R.string.invalid_amount))
+                    }
+                }else{
+                    showToast(getString(R.string.no_amount_error))
+                }
 
             })
 
