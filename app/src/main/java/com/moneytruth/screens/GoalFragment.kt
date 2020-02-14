@@ -4,6 +4,7 @@ package com.moneytruth.screens
 import android.content.Context
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -124,10 +125,10 @@ class GoalFragment : Fragment() {
 
         mIndicatorSeekBar.setOnSeekChangeListener(object : OnSeekChangeListener {
             override fun onSeeking(seekParams: SeekParams) {
-                val yearVal = seekParams.tickText + " Years"
+                val yearVal = "" + seekParams.progress + " Years"
                 mTvGoalYear.setText(yearVal)
-//                Log.i("SEEKBAR", seekParams.seekBar.toString())
-//                Log.i("SEEKBAR", ""+seekParams.progress)
+                Log.i("SEEKBAR", seekParams.seekBar.toString())
+                Log.i("SEEKBAR", ""+seekParams.progress)
 //                Log.i("SEEKBAR", ""+seekParams.progressFloat)
 //                Log.i("SEEKBAR", ""+seekParams.fromUser)
 //                //when tick count > 0

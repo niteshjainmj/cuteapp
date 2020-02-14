@@ -7,6 +7,8 @@
     <string name="home_saving_type_label">Saving Goal</string>
     <string name="home_year_type_label">Years to achieve Goal</string>
     <string name="home_total_type_label">Total Money saved</string>
+    <string name="home_total_current_money_label">Current Balance</string>
+
 
     <string name="btn_transfer">Transfer</string>
     <string name="btn_deposit">Deposit</string>

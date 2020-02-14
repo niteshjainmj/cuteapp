@@ -116,7 +116,7 @@
             app:isb_indicator_text_color="@color/colorAccent"
             app:isb_indicator_text_size="18sp"
             app:isb_max="75"
-            app:isb_min="25"
+            app:isb_min="1"
 
             app:isb_only_thumb_draggable="false"
             app:isb_seek_smoothly="true"
@@ -130,7 +130,7 @@
             app:isb_tick_texts_color="@color/color_green"
             app:isb_tick_texts_size="15sp"
 
-            app:isb_ticks_count="11"
+
             app:isb_track_background_color="@color/color_gray"
             app:isb_track_background_size="2dp"
             app:isb_track_progress_color="@color/color_blue"

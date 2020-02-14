@@ -77,6 +77,9 @@ class HomeActivity : AppCompatActivity() {
             var saveBalance = getString(R.string.home_bank_current_balance)
             var saveFuture = getString(R.string.home_bank_future)
 
+            var currentBalance = getString(R.string.home_total_current_money_label)
+
+
 
             var piggyInflationRate = getString(R.string.home_rate_of_inflation)
             var piggyBalance = getString(R.string.home_piggi_current_balance)
@@ -86,6 +89,8 @@ class HomeActivity : AppCompatActivity() {
             if(mViewModel.mGoalDetails?.value != null){
                 saveInterestRate += " : " + getDoubleToString(mViewModel.mGoalDetails?.value!!.mInterestRate) + " %"
                 saveBalance += " $ : " + getBigDecimalToString(AppManager.manager.getSavingAccountBalance(this))
+
+
 
                 saveFuture +=  " $ : " + getCompoundInterestString(AppManager.manager.getSavingAccountBalance(this),
                     mViewModel.mGoalDetails!!.value!!.mInterestRate,  mViewModel.mGoalDetails!!.value!!.mYears)
@@ -97,6 +102,10 @@ class HomeActivity : AppCompatActivity() {
 
                 piggyFuture +=  " $ : " + getInflationBasedValue(AppManager.manager.getPiggyBankBalance(this),
                     AppManager.manager.getInflationRate(this),  mViewModel.mGoalDetails!!.value!!.mYears)
+
+
+                val currentBalanceBigDecimal = AppManager.manager.getSavingAccountBalance(this).add(AppManager.manager.getPiggyBankBalance(this))
+                currentBalance += " - $ " + getBigDecimalToString(currentBalanceBigDecimal)
             }
 
             mTvHomeSavingIntrestRate.text = saveInterestRate
@@ -106,6 +115,8 @@ class HomeActivity : AppCompatActivity() {
             mTvHomePiggyIntrestRate.text = piggyInflationRate
             mTvHomePiggyBalance.text = piggyBalance
             mTvHomePiggyFuture.text = piggyFuture
+
+            mTvSavingGoalCurrentBalance.text = currentBalance
         })
 
 

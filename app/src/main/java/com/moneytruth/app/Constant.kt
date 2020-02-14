@@ -52,7 +52,12 @@ fun getInflationBasedValue( aAmount : BigDecimal, aRate : Double,  aYear : Int )
     }
     val  reduceAmount : BigDecimal = cost.minus(aAmount)
     var remainingAmount = aAmount.minus(reduceAmount)
-    return getBigDecimalToString(remainingAmount)
+    if(remainingAmount.signum() == -1){
+        return getBigDecimalToString(BigDecimal("0"))
+    }else{
+        return getBigDecimalToString(remainingAmount)
+
+    }
 }
 
 
